@@ -21,53 +21,56 @@ extern log_t* g_log;
 
 const float vtx_data[] =
 {
-	0.25f,  0.25f, 0.75f, 1.0f,
-	0.25f, -0.25f, 0.75f, 1.0f,
-	-0.25f,  0.25f, 0.75f, 1.0f,
+	0.25f,  0.25f, -1.25f, 1.0f,
+	0.25f, -0.25f, -1.25f, 1.0f,
+	-0.25f,  0.25f, -1.25f, 1.0f,
 
-	0.25f, -0.25f, 0.75f, 1.0f,
-	-0.25f, -0.25f, 0.75f, 1.0f,
-	-0.25f,  0.25f, 0.75f, 1.0f,
+	0.25f, -0.25f, -1.25f, 1.0f,
+	-0.25f, -0.25f, -1.25f, 1.0f,
+	-0.25f,  0.25f, -1.25f, 1.0f,
 
-	0.25f,  0.25f, -0.75f, 1.0f,
-	-0.25f,  0.25f, -0.75f, 1.0f,
-	0.25f, -0.25f, -0.75f, 1.0f,
+	0.25f,  0.25f, -2.75f, 1.0f,
+	-0.25f,  0.25f, -2.75f, 1.0f,
+	0.25f, -0.25f, -2.75f, 1.0f,
 
-	0.25f, -0.25f, -0.75f, 1.0f,
-	-0.25f,  0.25f, -0.75f, 1.0f,
-	-0.25f, -0.25f, -0.75f, 1.0f,
+	0.25f, -0.25f, -2.75f, 1.0f,
+	-0.25f,  0.25f, -2.75f, 1.0f,
+	-0.25f, -0.25f, -2.75f, 1.0f,
 
-	-0.25f,  0.25f,  0.75f, 1.0f,
-	-0.25f, -0.25f,  0.75f, 1.0f,
-	-0.25f, -0.25f, -0.75f, 1.0f,
+	-0.25f,  0.25f, -1.25f, 1.0f,
+	-0.25f, -0.25f, -1.25f, 1.0f,
+	-0.25f, -0.25f, -2.75f, 1.0f,
 
-	-0.25f,  0.25f,  0.75f, 1.0f,
-	-0.25f, -0.25f, -0.75f, 1.0f,
-	-0.25f,  0.25f, -0.75f, 1.0f,
+	-0.25f,  0.25f, -1.25f, 1.0f,
+	-0.25f, -0.25f, -2.75f, 1.0f,
+	-0.25f,  0.25f, -2.75f, 1.0f,
 
-	0.25f,  0.25f,  0.75f, 1.0f,
-	0.25f, -0.25f, -0.75f, 1.0f,
-	0.25f, -0.25f,  0.75f, 1.0f,
+	0.25f,  0.25f, -1.25f, 1.0f,
+	0.25f, -0.25f, -2.75f, 1.0f,
+	0.25f, -0.25f, -1.25f, 1.0f,
 
-	0.25f,  0.25f,  0.75f, 1.0f,
-	0.25f,  0.25f, -0.75f, 1.0f,
-	0.25f, -0.25f, -0.75f, 1.0f,
+	0.25f,  0.25f, -1.25f, 1.0f,
+	0.25f,  0.25f, -2.75f, 1.0f,
+	0.25f, -0.25f, -2.75f, 1.0f,
 
-	0.25f,  0.25f, -0.75f, 1.0f,
-	0.25f,  0.25f,  0.75f, 1.0f,
-	-0.25f,  0.25f,  0.75f, 1.0f,
+	0.25f,  0.25f, -2.75f, 1.0f,
+	0.25f,  0.25f, -1.25f, 1.0f,
+	-0.25f,  0.25f, -1.25f, 1.0f,
 
-	0.25f,  0.25f, -0.75f, 1.0f,
-	-0.25f,  0.25f,  0.75f, 1.0f,
-	-0.25f,  0.25f, -0.75f, 1.0f,
+	0.25f,  0.25f, -2.75f, 1.0f,
+	-0.25f,  0.25f, -1.25f, 1.0f,
+	-0.25f,  0.25f, -2.75f, 1.0f,
 
-	0.25f, -0.25f, -0.75f, 1.0f,
-	-0.25f, -0.25f,  0.75f, 1.0f,
-	0.25f, -0.25f,  0.75f, 1.0f,
+	0.25f, -0.25f, -2.75f, 1.0f,
+	-0.25f, -0.25f, -1.25f, 1.0f,
+	0.25f, -0.25f, -1.25f, 1.0f,
 
-	0.25f, -0.25f, -0.75f, 1.0f,
-	-0.25f, -0.25f, -0.75f, 1.0f,
-	-0.25f, -0.25f,  0.75f, 1.0f,
+	0.25f, -0.25f, -2.75f, 1.0f,
+	-0.25f, -0.25f, -2.75f, 1.0f,
+	-0.25f, -0.25f, -1.25f, 1.0f,
+
+
+
 
 	0.0f, 0.0f, 1.0f, 1.0f,
 	0.0f, 0.0f, 1.0f, 1.0f,
@@ -118,6 +121,7 @@ const float vtx_data[] =
 	0.0f, 1.0f, 1.0f, 1.0f,
 };
 
+
 /******************************************************************************
 func:
 desc: start the renderer 
@@ -146,6 +150,9 @@ int rn_t::start( void )
 	if( ( retv = create_sh_program() ) != ERR_OK )
 		goto out;
 
+	/*initialze shaders*/
+	initialize_shaders();
+
 	delete_all_shaders();
 
 	/*initialize the vertex data*/
@@ -165,21 +172,15 @@ desc: draw the scene
  *****************************************************************************/
 int rn_t::draw( void )
 {
-	//float x_off = 0.0f;
-	//float y_off = 0.0f;
 	unsigned color_data = sizeof( vtx_data ) / 2;
-
-	//update_offsets( &x_off, &y_off );
+	static GLfloat offx = 0.0;
+	static GLfloat offy = 0.0;
 
 	glClearColor( BG_COLOR );
 	glClear( GL_COLOR_BUFFER_BIT );
 	glUseProgram( r_sh_program );
 
-	/*assign the shader inputs*/
-	glUniform2f(
-			glGetUniformLocation( r_sh_program, "offset" ),
-			0.5f,
-			0.25f );
+	glUniform2f( glGetUniformLocation( r_sh_program, "offset" ), offx, offy );
 
 	glBindBuffer( GL_ARRAY_BUFFER, r_pos_bobj );
 	glEnableVertexAttribArray( 0 );
@@ -202,6 +203,15 @@ int rn_t::draw( void )
 	glDisableVertexAttribArray( 0 );
 	glDisableVertexAttribArray( 1 );
 	glUseProgram( 0 );
+
+	offx += 0.03f;
+	offy += 0.01f;
+
+	if( offx > 1.0f )
+		offx = -1.0f;
+	if( offy > 1.0f )
+		offy = -1.0f;
+
 	return ERR_OK;
 }
 
@@ -416,13 +426,13 @@ desc: update the vertex buffer offsets, move to engine
  *****************************************************************************/
 int rn_t::update_offsets( float* x_offset, float* y_offset )
 {
-	float duration = 5.0f;
-	float scale = ( 3.14159f * 2.0f ) / duration;
-	float et = (float)( ( clock() * 1000 ) / CLOCKS_PER_SEC );
-	float time_index = fmodf( et, duration );
+	/*	float duration = 5.0f;
+		float scale = ( 3.14159f * 2.0f ) / duration;
+		float et = (float)( ( clock() * 1000 ) / CLOCKS_PER_SEC );
+		float time_index = fmodf( et, duration );
 
-	*x_offset = cosf( time_index * scale ) * 0.5f;
-	*y_offset = sinf( time_index * scale ) * 0.5f;
+	 *x_offset = cosf( time_index * scale ) * 0.5f;
+	 *y_offset = sinf( time_index * scale ) * 0.5f;*/
 
 	return ERR_OK;
 }
@@ -434,28 +444,27 @@ desc:
  *****************************************************************************/
 int rn_t::adj_vtx_data( float x_offset, float y_offset )
 {
-	int i = 0;
+	/*	int i = 0;
 
-	/*tri data*/
-	float vtx_data[] =
-	{
+		float vtx_data[] =
+		{
 		0.0f, 0.5f, 0.0f, 1.0f,
 		0.5f, -0.366f, 0.0f, 1.0f,
 		-0.5f, -0.366f, 0.0f, 1.0f,
 		1.0f, 0.0f, 0.0f, 1.0f,
 		0.0f, 1.0f, 0.0f, 1.0f,
 		0.0f, 0.0f, 1.0f, 1.0f,
-	};
+		};
 
-	for( i = 0; i < sizeof(vtx_data) / sizeof(vtx_data[0] ); i += 4 )
-	{
+		for( i = 0; i < sizeof(vtx_data) / sizeof(vtx_data[0] ); i += 4 )
+		{
 		vtx_data[i] += x_offset;
 		vtx_data[i+1] += y_offset;
-	}
+		}
 
-	glBindBuffer( GL_ARRAY_BUFFER, r_pos_bobj );
-	glBufferSubData( GL_ARRAY_BUFFER, 0, sizeof(vtx_data), vtx_data );
-	glBindBuffer( GL_ARRAY_BUFFER, 0 );
+		glBindBuffer( GL_ARRAY_BUFFER, r_pos_bobj );
+		glBufferSubData( GL_ARRAY_BUFFER, 0, sizeof(vtx_data), vtx_data );
+		glBindBuffer( GL_ARRAY_BUFFER, 0 );*/
 
 	return ERR_OK;
 }
@@ -475,3 +484,20 @@ int rn_t::set_gl_state( void )
 }
 
 
+/******************************************************************************
+func: setup any initial uniforms for the shaders
+desc:
+ *****************************************************************************/
+int rn_t::initialize_shaders( void )
+{
+	glUseProgram( r_sh_program );
+	
+	/*assign the shader inputs*/
+	glUniform2f( glGetUniformLocation( r_sh_program, "offset" ), 0.5f, 0.5f );
+	glUniform1f( glGetUniformLocation( r_sh_program, "f_scale" ), 1.0f );
+	glUniform1f( glGetUniformLocation( r_sh_program, "zNear" ), 1.0f );
+	glUniform1f( glGetUniformLocation( r_sh_program, "zFar" ), 3.0f );
+	glUseProgram( 0 );
+
+	return ERR_OK;
+}

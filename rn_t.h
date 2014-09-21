@@ -41,6 +41,7 @@ class rn_t
 		int delete_all_shaders( void );
 		int init_vtx_b( void );
 		int set_gl_state( void );
+		int initialize_shaders( void );
 
 		/*attribs*/
 		vector<GLuint> r_shader_list;
