@@ -27,9 +27,6 @@ class rn_t
 		int draw( void );
 		int shutdown( void );
 
-		int update_offsets( float* x_offset, float* y_offset );
-		int adj_vtx_data( float x_offset, float y_offset );
-
 	private:
 		/*functions*/
 		int load_all_shaders( void );

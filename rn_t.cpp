@@ -421,56 +421,6 @@ int rn_t::init_vtx_b( void )
 
 
 /******************************************************************************
-func:
-desc: update the vertex buffer offsets, move to engine
- *****************************************************************************/
-int rn_t::update_offsets( float* x_offset, float* y_offset )
-{
-	/*	float duration = 5.0f;
-		float scale = ( 3.14159f * 2.0f ) / duration;
-		float et = (float)( ( clock() * 1000 ) / CLOCKS_PER_SEC );
-		float time_index = fmodf( et, duration );
-
-	 *x_offset = cosf( time_index * scale ) * 0.5f;
-	 *y_offset = sinf( time_index * scale ) * 0.5f;*/
-
-	return ERR_OK;
-}
-
-
-/******************************************************************************
-func: update the vertex data with the new offsets
-desc:
- *****************************************************************************/
-int rn_t::adj_vtx_data( float x_offset, float y_offset )
-{
-	/*	int i = 0;
-
-		float vtx_data[] =
-		{
-		0.0f, 0.5f, 0.0f, 1.0f,
-		0.5f, -0.366f, 0.0f, 1.0f,
-		-0.5f, -0.366f, 0.0f, 1.0f,
-		1.0f, 0.0f, 0.0f, 1.0f,
-		0.0f, 1.0f, 0.0f, 1.0f,
-		0.0f, 0.0f, 1.0f, 1.0f,
-		};
-
-		for( i = 0; i < sizeof(vtx_data) / sizeof(vtx_data[0] ); i += 4 )
-		{
-		vtx_data[i] += x_offset;
-		vtx_data[i+1] += y_offset;
-		}
-
-		glBindBuffer( GL_ARRAY_BUFFER, r_pos_bobj );
-		glBufferSubData( GL_ARRAY_BUFFER, 0, sizeof(vtx_data), vtx_data );
-		glBindBuffer( GL_ARRAY_BUFFER, 0 );*/
-
-	return ERR_OK;
-}
-
-
-/******************************************************************************
 func: setup the gl state machine
 desc:
  *****************************************************************************/
