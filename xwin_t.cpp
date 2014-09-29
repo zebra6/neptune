@@ -62,6 +62,10 @@ int xwin_t::start( void )
 			!= ERR_OK )
 		goto out;
 
+	/*thse may need to be moved back to the draw function*/
+	XGetWindowAttributes( x_disp, *x_win, x_attribs );
+	glViewport( 0, 0, x_attribs->width, x_attribs->height );
+
 out:
 	return retv;
 }
@@ -112,13 +116,23 @@ int xwin_t::handle_events( rn_t* r, short* draw_flag )
 			/*update the window where we need to*/
 			case Expose:
 				*draw_flag = true;
-				break;
+				//break;
 
 				/*handle key presses*/
 			case KeyPress:
 				g_log->w( MSG_INFO, "key %u\n", x_event->xkey.keycode );
 				if( x_event->xkey.keycode == 24 )
 					retv = ERR_QUIT;
+				//break;
+
+			case ConfigureNotify:
+				XGetWindowAttributes( x_disp, *x_win, x_attribs );
+				glViewport( 0, 0, x_attribs->width, x_attribs->height );
+				g_log->w(
+						MSG_INFO,
+						"resize request: %i, %i\n",
+						x_attribs->width,
+						x_attribs->height );
 				break;
 
 			default:
@@ -137,8 +151,6 @@ desc: draw the window
 int xwin_t::draw_window( rn_t* r )
 {
 	/*draw the window*/
-	XGetWindowAttributes( x_disp, *x_win, x_attribs );
-	glViewport( 0, 0, x_attribs->width, x_attribs->height );
 	r->draw();
 	glXSwapBuffers( x_disp, *x_win );
 

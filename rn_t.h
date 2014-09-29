@@ -9,7 +9,7 @@ desc:
 #include <vector>			//stl vector
 #include <string>
 
-#define BG_COLOR 0.0f, 0.0f, 0.0f, 0.0f
+#define BG_COLOR 0.0f, 0.2f, 0.3f, 1.0f
 #define VTX_SHADER_DIR "shader/vertex/"
 #define FRAG_SHADER_DIR "shader/fragment/"
 
@@ -39,13 +39,14 @@ class rn_t
 		int init_vtx_b( void );
 		int set_gl_state( void );
 		int initialize_shaders( void );
+		int set_perspective( void );
 
 		/*attribs*/
 		vector<GLuint> r_shader_list;
 		GLuint r_sh_program;
-
 		GLuint r_pos_bobj;
 		GLuint r_vtx_array_obj;
+		
 };
 
 

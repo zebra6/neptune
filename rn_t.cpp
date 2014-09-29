@@ -440,13 +440,56 @@ desc:
  *****************************************************************************/
 int rn_t::initialize_shaders( void )
 {
-	glUseProgram( r_sh_program );
+	GLuint perspective_mat_unif = 0;
+	GLfloat f_scale = 1.0f;
+	GLfloat z_near = 1.0f;
+	GLfloat z_far = 3.0f;
+	GLfloat ps_matrix[16] = { 0.0f };
+
+	/*initialze for matrix multiplication*/
+	ps_matrix[0] = f_scale;
+	ps_matrix[5] = f_scale;
+	ps_matrix[10] = ( z_far + z_near ) / ( z_near - z_far );
+	ps_matrix[11] = -1.0f;
+	ps_matrix[14] = ( 2 * z_far * z_near ) / ( z_near - z_far );
+
+	perspective_mat_unif = glGetUniformLocation( r_sh_program,
+			"perspective_matrix" );
 	
-	/*assign the shader inputs*/
-	glUniform2f( glGetUniformLocation( r_sh_program, "offset" ), 0.5f, 0.5f );
-	glUniform1f( glGetUniformLocation( r_sh_program, "f_scale" ), 1.0f );
-	glUniform1f( glGetUniformLocation( r_sh_program, "zNear" ), 1.0f );
-	glUniform1f( glGetUniformLocation( r_sh_program, "zFar" ), 3.0f );
+	/*send the matrix to the shader*/
+	glUseProgram( r_sh_program );
+	glUniformMatrix4fv( perspective_mat_unif, 1, GL_FALSE, ps_matrix );
+	glUseProgram( 0 );
+
+	return ERR_OK;
+}
+
+
+/******************************************************************************
+func: setup any initial uniforms for the shaders
+desc:
+ *****************************************************************************/
+int rn_t::set_perspective( void )
+{
+	GLuint perspective_mat_unif = 0;
+	GLfloat f_scale = 1.0f;
+	GLfloat z_near = 1.0f;
+	GLfloat z_far = 3.0f;
+	GLfloat ps_matrix[16] = { 0.0f };
+
+	/*initialze for matrix multiplication*/
+	ps_matrix[0] = f_scale;
+	ps_matrix[5] = f_scale;
+	ps_matrix[10] = ( z_far + z_near ) / ( z_near - z_far );
+	ps_matrix[11] = -1.0f;
+	ps_matrix[14] = ( 2 * z_far * z_near ) / ( z_near - z_far );
+
+	perspective_mat_unif = glGetUniformLocation( r_sh_program,
+			"perspective_matrix" );
+	
+	/*send the matrix to the shader*/
+	glUseProgram( r_sh_program );
+	glUniformMatrix4fv( perspective_mat_unif, 1, GL_FALSE, ps_matrix );
 	glUseProgram( 0 );
 
 	return ERR_OK;
