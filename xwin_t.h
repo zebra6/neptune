@@ -29,10 +29,11 @@ class xwin_t
 
 		int handle_events( rn_t* r, short* draw_flag );
 		int draw_window( rn_t* r );
-
+		
 	private:
 		/*functions*/
 		int make_window( int x, int y, unsigned w, unsigned h );
+		int resize_win( XWindowAttributes* attr );
 
 		/*attribs*/
 		int x_x_pos;

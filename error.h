@@ -15,5 +15,5 @@ desc: error codes
 #define ERR_STAT 9				//filesystem stat() failed
 #define ERR_QUIT 10				//user exited
 #define ERR_NO_FONT 11			//couldn't find a font requested
-
+#define ERR_WIN_SIZE 12			//window position was invalid
 

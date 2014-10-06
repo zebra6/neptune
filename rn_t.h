@@ -20,12 +20,13 @@ class rn_t
 {
 	public:
 		/*functions*/
-		rn_t( void ) {};
+		rn_t( void );
 		~rn_t( void ) {};
 
 		int start( void );
 		int draw( void );
 		int shutdown( void );
+		int resize_gl( int w, int h );
 
 	private:
 		/*functions*/
@@ -39,14 +40,17 @@ class rn_t
 		int init_vtx_b( void );
 		int set_gl_state( void );
 		int initialize_shaders( void );
-		int set_perspective( void );
-
+		
 		/*attribs*/
 		vector<GLuint> r_shader_list;
 		GLuint r_sh_program;
 		GLuint r_pos_bobj;
 		GLuint r_vtx_array_obj;
-		
+
+		GLfloat ps_matrix[16];		//perspective matrix
+		GLfloat f_scale;			//frustrum scale
+		GLfloat z_near;				//z near
+		GLfloat z_far;				//z far
 };
 
 

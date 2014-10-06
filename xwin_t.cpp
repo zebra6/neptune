@@ -126,11 +126,15 @@ int xwin_t::handle_events( rn_t* r, short* draw_flag )
 				//break;
 
 			case ConfigureNotify:
+				resize_win( x_attribs );
+				r->resize_gl( x_attribs->width, x_attribs->height );
 				XGetWindowAttributes( x_disp, *x_win, x_attribs );
-				glViewport( 0, 0, x_attribs->width, x_attribs->height );
+				//glViewport( 0, 0, x_attribs->width, x_attribs->height );
 				g_log->w(
 						MSG_INFO,
-						"resize request: %i, %i\n",
+						"resize request: %i, %i, %i, %i\n",
+						x_attribs->x,
+						x_attribs->y,
 						x_attribs->width,
 						x_attribs->height );
 				break;
@@ -222,3 +226,18 @@ out:
 }
 
 
+/******************************************************************************
+func: handle a resize on the x11 side
+desc: 
+ *****************************************************************************/
+int xwin_t::resize_win( XWindowAttributes* attr )
+{
+	assert( attr );
+
+	x_x_pos = attr->x;
+	x_y_pos = attr->y;
+	x_width = attr->width;
+	x_height = attr->height;
+
+	return ERR_OK;
+}

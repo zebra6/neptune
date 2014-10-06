@@ -12,6 +12,7 @@ desc:
 #include <vector>			//stl vector
 #include <algorithm>		//stl for each
 #include <string>			//stl string
+#include <string.h>			//memset
 
 using std::vector;
 using std::string;
@@ -123,6 +124,20 @@ const float vtx_data[] =
 
 
 /******************************************************************************
+func: constructor, zero out the perspective array and set the initial scales
+desc: 
+ *****************************************************************************/
+rn_t::rn_t( void )
+{
+	memset( ps_matrix, 0, sizeof(GLfloat) * 16 );
+
+	f_scale = 1.0f;
+	z_near = 1.0f;
+	z_far = 3.0f;
+}
+
+
+/******************************************************************************
 func:
 desc: start the renderer 
  *****************************************************************************/
@@ -152,7 +167,6 @@ int rn_t::start( void )
 
 	/*initialze shaders*/
 	initialize_shaders();
-
 	delete_all_shaders();
 
 	/*initialize the vertex data*/
@@ -225,6 +239,42 @@ int rn_t::shutdown( void )
 	/*shut down*/
 	glDeleteProgram( r_sh_program );
 	return ERR_OK;
+}
+
+
+/******************************************************************************
+func: take care of a window resize call
+desc:
+ *****************************************************************************/
+int rn_t::resize_gl( int w, int h )
+{
+	int retv = ERR_OK;
+	GLuint perspective_mat_unif = 0;
+
+	if( w <= 0 || h <= 0 )
+	{
+		retv = ERR_WIN_SIZE;
+		goto out;
+	}
+
+	/*set the new scale*/
+	ps_matrix[0] = f_scale / ( w / (float)h );
+	ps_matrix[5] = f_scale;
+
+	/*send it to the shader*/
+	perspective_mat_unif = glGetUniformLocation( r_sh_program,
+			"perspective_matrix" );
+
+	/*send the matrix to the shader*/
+	glUseProgram( r_sh_program );
+	glUniformMatrix4fv( perspective_mat_unif, 1, GL_FALSE, ps_matrix );
+	glUseProgram( 0 );
+
+	/*reset the viewport*/
+	glViewport( 0, 0, (GLsizei)w, (GLsizei)h );
+
+out:
+	return retv;
 }
 
 
@@ -441,10 +491,9 @@ desc:
 int rn_t::initialize_shaders( void )
 {
 	GLuint perspective_mat_unif = 0;
-	GLfloat f_scale = 1.0f;
-	GLfloat z_near = 1.0f;
-	GLfloat z_far = 3.0f;
-	GLfloat ps_matrix[16] = { 0.0f };
+	//GLfloat f_scale = 1.0f;
+	//GLfloat z_near = 1.0f;
+	//GLfloat z_far = 3.0f;
 
 	/*initialze for matrix multiplication*/
 	ps_matrix[0] = f_scale;
@@ -455,7 +504,7 @@ int rn_t::initialize_shaders( void )
 
 	perspective_mat_unif = glGetUniformLocation( r_sh_program,
 			"perspective_matrix" );
-	
+
 	/*send the matrix to the shader*/
 	glUseProgram( r_sh_program );
 	glUniformMatrix4fv( perspective_mat_unif, 1, GL_FALSE, ps_matrix );
@@ -465,32 +514,4 @@ int rn_t::initialize_shaders( void )
 }
 
 
-/******************************************************************************
-func: setup any initial uniforms for the shaders
-desc:
- *****************************************************************************/
-int rn_t::set_perspective( void )
-{
-	GLuint perspective_mat_unif = 0;
-	GLfloat f_scale = 1.0f;
-	GLfloat z_near = 1.0f;
-	GLfloat z_far = 3.0f;
-	GLfloat ps_matrix[16] = { 0.0f };
 
-	/*initialze for matrix multiplication*/
-	ps_matrix[0] = f_scale;
-	ps_matrix[5] = f_scale;
-	ps_matrix[10] = ( z_far + z_near ) / ( z_near - z_far );
-	ps_matrix[11] = -1.0f;
-	ps_matrix[14] = ( 2 * z_far * z_near ) / ( z_near - z_far );
-
-	perspective_mat_unif = glGetUniformLocation( r_sh_program,
-			"perspective_matrix" );
-	
-	/*send the matrix to the shader*/
-	glUseProgram( r_sh_program );
-	glUniformMatrix4fv( perspective_mat_unif, 1, GL_FALSE, ps_matrix );
-	glUseProgram( 0 );
-
-	return ERR_OK;
-}
