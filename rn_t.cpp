@@ -20,108 +20,134 @@ using std::for_each;
 
 extern log_t* g_log;
 
+#define RIGHT_EXTENT 0.8f
+#define LEFT_EXTENT -RIGHT_EXTENT
+#define TOP_EXTENT 0.20f
+#define MIDDLE_EXTENT 0.0f
+#define BOTTOM_EXTENT -TOP_EXTENT
+#define FRONT_EXTENT -1.25f
+#define REAR_EXTENT -1.75f
+
+#define GREEN_COLOR 0.75f, 0.75f, 1.0f, 1.0f
+#define BLUE_COLOR 	0.0f, 0.5f, 0.0f, 1.0f
+#define RED_COLOR 1.0f, 0.0f, 0.0f, 1.0f
+#define GREY_COLOR 0.8f, 0.8f, 0.8f, 1.0f
+#define BROWN_COLOR 0.5f, 0.5f, 0.0f, 1.0f
+
+int g_num_vtx = 36;
 const float vtx_data[] =
 {
-	0.25f,  0.25f, -1.25f, 1.0f,
-	0.25f, -0.25f, -1.25f, 1.0f,
-	-0.25f,  0.25f, -1.25f, 1.0f,
+	/*object 1*/
+	LEFT_EXTENT,	TOP_EXTENT,		REAR_EXTENT,
+	LEFT_EXTENT,	MIDDLE_EXTENT,	FRONT_EXTENT,
+	RIGHT_EXTENT,	MIDDLE_EXTENT,	FRONT_EXTENT,
+	RIGHT_EXTENT,	TOP_EXTENT,		REAR_EXTENT,
 
-	0.25f, -0.25f, -1.25f, 1.0f,
-	-0.25f, -0.25f, -1.25f, 1.0f,
-	-0.25f,  0.25f, -1.25f, 1.0f,
+	LEFT_EXTENT,	BOTTOM_EXTENT,	REAR_EXTENT,
+	LEFT_EXTENT,	MIDDLE_EXTENT,	FRONT_EXTENT,
+	RIGHT_EXTENT,	MIDDLE_EXTENT,	FRONT_EXTENT,
+	RIGHT_EXTENT,	BOTTOM_EXTENT,	REAR_EXTENT,
 
-	0.25f,  0.25f, -2.75f, 1.0f,
-	-0.25f,  0.25f, -2.75f, 1.0f,
-	0.25f, -0.25f, -2.75f, 1.0f,
+	LEFT_EXTENT,	TOP_EXTENT,		REAR_EXTENT,
+	LEFT_EXTENT,	MIDDLE_EXTENT,	FRONT_EXTENT,
+	LEFT_EXTENT,	BOTTOM_EXTENT,	REAR_EXTENT,
 
-	0.25f, -0.25f, -2.75f, 1.0f,
-	-0.25f,  0.25f, -2.75f, 1.0f,
-	-0.25f, -0.25f, -2.75f, 1.0f,
+	RIGHT_EXTENT,	TOP_EXTENT,		REAR_EXTENT,
+	RIGHT_EXTENT,	MIDDLE_EXTENT,	FRONT_EXTENT,
+	RIGHT_EXTENT,	BOTTOM_EXTENT,	REAR_EXTENT,
 
-	-0.25f,  0.25f, -1.25f, 1.0f,
-	-0.25f, -0.25f, -1.25f, 1.0f,
-	-0.25f, -0.25f, -2.75f, 1.0f,
+	LEFT_EXTENT,	BOTTOM_EXTENT,	REAR_EXTENT,
+	LEFT_EXTENT,	TOP_EXTENT,		REAR_EXTENT,
+	RIGHT_EXTENT,	TOP_EXTENT,		REAR_EXTENT,
+	RIGHT_EXTENT,	BOTTOM_EXTENT,	REAR_EXTENT,
 
-	-0.25f,  0.25f, -1.25f, 1.0f,
-	-0.25f, -0.25f, -2.75f, 1.0f,
-	-0.25f,  0.25f, -2.75f, 1.0f,
+	/*object 2*/
+	TOP_EXTENT,		RIGHT_EXTENT,	REAR_EXTENT,
+	MIDDLE_EXTENT,	RIGHT_EXTENT,	FRONT_EXTENT,
+	MIDDLE_EXTENT,	LEFT_EXTENT,	FRONT_EXTENT,
+	TOP_EXTENT,		LEFT_EXTENT,	REAR_EXTENT,
 
-	0.25f,  0.25f, -1.25f, 1.0f,
-	0.25f, -0.25f, -2.75f, 1.0f,
-	0.25f, -0.25f, -1.25f, 1.0f,
+	BOTTOM_EXTENT,	RIGHT_EXTENT,	REAR_EXTENT,
+	MIDDLE_EXTENT,	RIGHT_EXTENT,	FRONT_EXTENT,
+	MIDDLE_EXTENT,	LEFT_EXTENT,	FRONT_EXTENT,
+	BOTTOM_EXTENT,	LEFT_EXTENT,	REAR_EXTENT,
 
-	0.25f,  0.25f, -1.25f, 1.0f,
-	0.25f,  0.25f, -2.75f, 1.0f,
-	0.25f, -0.25f, -2.75f, 1.0f,
+	TOP_EXTENT,		RIGHT_EXTENT,	REAR_EXTENT,
+	MIDDLE_EXTENT,	RIGHT_EXTENT,	FRONT_EXTENT,
+	BOTTOM_EXTENT,	RIGHT_EXTENT,	REAR_EXTENT,
 
-	0.25f,  0.25f, -2.75f, 1.0f,
-	0.25f,  0.25f, -1.25f, 1.0f,
-	-0.25f,  0.25f, -1.25f, 1.0f,
+	TOP_EXTENT,		LEFT_EXTENT,	REAR_EXTENT,
+	MIDDLE_EXTENT,	LEFT_EXTENT,	FRONT_EXTENT,
+	BOTTOM_EXTENT,	LEFT_EXTENT,	REAR_EXTENT,
 
-	0.25f,  0.25f, -2.75f, 1.0f,
-	-0.25f,  0.25f, -1.25f, 1.0f,
-	-0.25f,  0.25f, -2.75f, 1.0f,
+	BOTTOM_EXTENT,	RIGHT_EXTENT,	REAR_EXTENT,
+	TOP_EXTENT,		RIGHT_EXTENT,	REAR_EXTENT,
+	TOP_EXTENT,		LEFT_EXTENT,	REAR_EXTENT,
+	BOTTOM_EXTENT,	LEFT_EXTENT,	REAR_EXTENT,
 
-	0.25f, -0.25f, -2.75f, 1.0f,
-	-0.25f, -0.25f, -1.25f, 1.0f,
-	0.25f, -0.25f, -1.25f, 1.0f,
+	/*colors 1*/
+	GREEN_COLOR,
+	GREEN_COLOR,
+	GREEN_COLOR,
+	GREEN_COLOR,
 
-	0.25f, -0.25f, -2.75f, 1.0f,
-	-0.25f, -0.25f, -2.75f, 1.0f,
-	-0.25f, -0.25f, -1.25f, 1.0f,
+	BLUE_COLOR,
+	BLUE_COLOR,
+	BLUE_COLOR,
+	BLUE_COLOR,
 
+	RED_COLOR,
+	RED_COLOR,
+	RED_COLOR,
 
+	GREY_COLOR,
+	GREY_COLOR,
+	GREY_COLOR,
 
+	BROWN_COLOR,
+	BROWN_COLOR,
+	BROWN_COLOR,
+	BROWN_COLOR,
 
-	0.0f, 0.0f, 1.0f, 1.0f,
-	0.0f, 0.0f, 1.0f, 1.0f,
-	0.0f, 0.0f, 1.0f, 1.0f,
+	/*colors 2*/
+	RED_COLOR,
+	RED_COLOR,
+	RED_COLOR,
+	RED_COLOR,
 
-	0.0f, 0.0f, 1.0f, 1.0f,
-	0.0f, 0.0f, 1.0f, 1.0f,
-	0.0f, 0.0f, 1.0f, 1.0f,
+	BROWN_COLOR,
+	BROWN_COLOR,
+	BROWN_COLOR,
+	BROWN_COLOR,
 
-	0.8f, 0.8f, 0.8f, 1.0f,
-	0.8f, 0.8f, 0.8f, 1.0f,
-	0.8f, 0.8f, 0.8f, 1.0f,
+	BLUE_COLOR,
+	BLUE_COLOR,
+	BLUE_COLOR,
 
-	0.8f, 0.8f, 0.8f, 1.0f,
-	0.8f, 0.8f, 0.8f, 1.0f,
-	0.8f, 0.8f, 0.8f, 1.0f,
+	GREEN_COLOR,
+	GREEN_COLOR,
+	GREEN_COLOR,
 
-	0.0f, 1.0f, 0.0f, 1.0f,
-	0.0f, 1.0f, 0.0f, 1.0f,
-	0.0f, 1.0f, 0.0f, 1.0f,
-
-	0.0f, 1.0f, 0.0f, 1.0f,
-	0.0f, 1.0f, 0.0f, 1.0f,
-	0.0f, 1.0f, 0.0f, 1.0f,
-
-	0.5f, 0.5f, 0.0f, 1.0f,
-	0.5f, 0.5f, 0.0f, 1.0f,
-	0.5f, 0.5f, 0.0f, 1.0f,
-
-	0.5f, 0.5f, 0.0f, 1.0f,
-	0.5f, 0.5f, 0.0f, 1.0f,
-	0.5f, 0.5f, 0.0f, 1.0f,
-
-	1.0f, 0.0f, 0.0f, 1.0f,
-	1.0f, 0.0f, 0.0f, 1.0f,
-	1.0f, 0.0f, 0.0f, 1.0f,
-
-	1.0f, 0.0f, 0.0f, 1.0f,
-	1.0f, 0.0f, 0.0f, 1.0f,
-	1.0f, 0.0f, 0.0f, 1.0f,
-
-	0.0f, 1.0f, 1.0f, 1.0f,
-	0.0f, 1.0f, 1.0f, 1.0f,
-	0.0f, 1.0f, 1.0f, 1.0f,
-
-	0.0f, 1.0f, 1.0f, 1.0f,
-	0.0f, 1.0f, 1.0f, 1.0f,
-	0.0f, 1.0f, 1.0f, 1.0f,
+	GREY_COLOR,
+	GREY_COLOR,
+	GREY_COLOR,
+	GREY_COLOR,
 };
 
+const GLuint index_data[] =
+{
+	0, 2, 1,
+	3, 2, 0,
+
+	4, 5, 6,
+	6, 7, 4,
+
+	8, 9, 10,
+	11, 13, 12,
+
+	14, 16, 15,
+	17, 16, 14,
+};
 
 /******************************************************************************
 func: constructor, zero out the perspective array and set the initial scales
@@ -129,7 +155,9 @@ desc:
  *****************************************************************************/
 rn_t::rn_t( void )
 {
+	memset( r_vao_ar, 0, sizeof(GLint) * MAX_VAOS );
 	memset( ps_matrix, 0, sizeof(GLfloat) * 16 );
+	r_used_vaos = 0;
 
 	f_scale = 1.0f;
 	z_near = 1.0f;
@@ -171,6 +199,7 @@ int rn_t::start( void )
 
 	/*initialize the vertex data*/
 	init_vtx_b();
+	init_vaos();
 
 	/*set desired gl state*/
 	set_gl_state();
@@ -186,36 +215,34 @@ desc: draw the scene
  *****************************************************************************/
 int rn_t::draw( void )
 {
+	int i = 0;
 	unsigned color_data = sizeof( vtx_data ) / 2;
 	static GLfloat offx = 0.0;
 	static GLfloat offy = 0.0;
+	GLfloat offz = 0.0;
 
 	glClearColor( BG_COLOR );
 	glClear( GL_COLOR_BUFFER_BIT );
 	glUseProgram( r_sh_program );
 
-	glUniform2f( glGetUniformLocation( r_sh_program, "offset" ), offx, offy );
+	for( i = 0; i < r_used_vaos; i ++ )
+	{
+		glBindVertexArray( r_vao_ar[i] );
+		//glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, index_data ); 
+		glUniform3f(
+				glGetUniformLocation( r_sh_program, "offset" ),
+				offx,
+				offy,
+				offz );
+		glDrawElements(
+				GL_TRIANGLES,
+				24,
+				GL_UNSIGNED_SHORT,
+				0 );
+		offz -= 1.0f;
+	}
 
-	glBindBuffer( GL_ARRAY_BUFFER, r_pos_bobj );
-	glEnableVertexAttribArray( 0 );
-	glEnableVertexAttribArray( 1 );
-	glVertexAttribPointer(
-			0,
-			4,
-			GL_FLOAT,
-			GL_FALSE,
-			0,
-			0 );
-	glVertexAttribPointer(
-			1,
-			4,
-			GL_FLOAT,
-			GL_FALSE,
-			0,
-			(void*)color_data );
-	glDrawArrays( GL_TRIANGLES, 0, 36 );
-	glDisableVertexAttribArray( 0 );
-	glDisableVertexAttribArray( 1 );
+	glBindVertexArray( 0 );
 	glUseProgram( 0 );
 
 	offx += 0.03f;
@@ -452,7 +479,7 @@ desc:
  *****************************************************************************/
 int rn_t::init_vtx_b( void )
 {
-	/*bind the buffers to the gfx card*/
+	/*create the buffer object for the verticies*/
 	glGenBuffers( 1, &r_pos_bobj );
 	glBindBuffer( GL_ARRAY_BUFFER, r_pos_bobj );
 	glBufferData(
@@ -462,9 +489,82 @@ int rn_t::init_vtx_b( void )
 			GL_STATIC_DRAW );
 	glBindBuffer( GL_ARRAY_BUFFER, 0 );
 
-	/*???*/
-	glGenVertexArrays( 1, &r_vtx_array_obj );
-	glBindVertexArray( r_vtx_array_obj );
+	/*create the buffer object for the indicies*/
+	glGenBuffers( 1, &r_index_bobj );
+	glBindBuffer( GL_ARRAY_BUFFER, r_index_bobj );
+	glBufferData(
+			GL_ARRAY_BUFFER,
+			sizeof(index_data),
+			index_data,
+			GL_STATIC_DRAW );
+	glBindBuffer( GL_ARRAY_BUFFER, 0 );
+
+	return ERR_OK;
+}
+
+
+/******************************************************************************
+func:
+desc: setup all the vaos we want to use
+ *****************************************************************************/
+int rn_t::init_vaos( void )
+{
+	size_t color_data_offset = 0;
+	size_t pos_data_offset = 0;
+
+	/*generate the first vao*/
+	pos_data_offset = 0;
+	color_data_offset = sizeof(float) * 3 * g_num_vtx;
+
+	glGenVertexArrays( 1, &r_vao_ar[0] );
+	glBindVertexArray( r_vao_ar[0] );
+	glEnableVertexAttribArray( 0 );
+	glEnableVertexAttribArray( 1 );
+	glVertexAttribPointer(
+			0,
+			3,
+			GL_FLOAT,
+			GL_FALSE,
+			0,
+			0 );
+
+	glVertexAttribPointer(
+			1,
+			4,
+			GL_FLOAT,
+			GL_FALSE,
+			0,
+			(void*)color_data_offset );
+
+	glBindVertexArray( 0 );
+	r_used_vaos++;
+
+	/*setup the second vao*/
+	pos_data_offset = sizeof(float) * 4 * ( g_num_vtx / 2 );
+	color_data_offset += sizeof(float) * 3 * ( g_num_vtx / 2 );
+
+	glGenVertexArrays( 1, &r_vao_ar[1] );
+	glBindVertexArray( r_vao_ar[1] );
+	glEnableVertexAttribArray( 0 );
+	glEnableVertexAttribArray( 1 );
+	glVertexAttribPointer(
+			0,
+			3,
+			GL_FLOAT,
+			GL_FALSE,
+			0,
+			(void*)pos_data_offset );
+
+	glVertexAttribPointer(
+			1,
+			4,
+			GL_FLOAT,
+			GL_FALSE,
+			0,
+			(void*)color_data_offset );
+
+	glBindVertexArray( 0 );
+	r_used_vaos++;
 
 	return ERR_OK;
 }
@@ -491,9 +591,6 @@ desc:
 int rn_t::initialize_shaders( void )
 {
 	GLuint perspective_mat_unif = 0;
-	//GLfloat f_scale = 1.0f;
-	//GLfloat z_near = 1.0f;
-	//GLfloat z_far = 3.0f;
 
 	/*initialze for matrix multiplication*/
 	ps_matrix[0] = f_scale;

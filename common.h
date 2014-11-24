@@ -14,6 +14,7 @@ desc:
 #define MID_STR_LEN 128
 //#define ASSERT_OVERRIDE false
 #define SHOW_DBG_TIME false
+#define ARRAY_COUNT( array ) (sizeof( array ) / (sizeof( array[0] ) * (sizeof( array ) != sizeof(void*) || sizeof( array[0] ) <= sizeof(void*))))
 
 //int com_assert( int value );		//override built-in assert
 //int com_array_count( void ar[] );	//size of an array

@@ -12,6 +12,7 @@ desc:
 #define BG_COLOR 0.0f, 0.2f, 0.3f, 1.0f
 #define VTX_SHADER_DIR "shader/vertex/"
 #define FRAG_SHADER_DIR "shader/fragment/"
+#define MAX_VAOS 16
 
 using std::vector;
 using std::string;
@@ -38,6 +39,7 @@ class rn_t
 		int create_sh_program( void );
 		int delete_all_shaders( void );
 		int init_vtx_b( void );
+		int init_vaos( void );
 		int set_gl_state( void );
 		int initialize_shaders( void );
 		
@@ -45,7 +47,9 @@ class rn_t
 		vector<GLuint> r_shader_list;
 		GLuint r_sh_program;
 		GLuint r_pos_bobj;
-		GLuint r_vtx_array_obj;
+		GLuint r_index_bobj;
+		GLuint r_vao_ar[MAX_VAOS];
+		int r_used_vaos;
 
 		GLfloat ps_matrix[16];		//perspective matrix
 		GLfloat f_scale;			//frustrum scale

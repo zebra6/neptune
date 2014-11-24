@@ -1,3 +1,5 @@
 !.gitignore
 sl
 tags
+core
+demo/
