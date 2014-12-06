@@ -10,9 +10,14 @@ desc:
 #include <string>
 
 #define BG_COLOR 0.0f, 0.2f, 0.3f, 1.0f
+#define DEPTH_CLEAR 1.0f
+#define DR_NEAR 0.0f
+#define DR_FAR 1.0f
 #define VTX_SHADER_DIR "shader/vertex/"
 #define FRAG_SHADER_DIR "shader/fragment/"
 #define MAX_VAOS 16
+
+#define ARRAY_COUNT( array ) (sizeof( array ) / (sizeof( array[0] ) * (sizeof( array ) != sizeof(void*) || sizeof( array[0] ) <= sizeof(void*))))
 
 using std::vector;
 using std::string;

@@ -37,7 +37,7 @@ extern log_t* g_log;
 int g_num_vtx = 36;
 const float vtx_data[] =
 {
-	/*object 1*/
+	//Object 1 positions
 	LEFT_EXTENT,	TOP_EXTENT,		REAR_EXTENT,
 	LEFT_EXTENT,	MIDDLE_EXTENT,	FRONT_EXTENT,
 	RIGHT_EXTENT,	MIDDLE_EXTENT,	FRONT_EXTENT,
@@ -61,7 +61,10 @@ const float vtx_data[] =
 	RIGHT_EXTENT,	TOP_EXTENT,		REAR_EXTENT,
 	RIGHT_EXTENT,	BOTTOM_EXTENT,	REAR_EXTENT,
 
-	/*object 2*/
+	//	0, 2, 1,
+	//	3, 2, 0,
+
+	//Object 2 positions
 	TOP_EXTENT,		RIGHT_EXTENT,	REAR_EXTENT,
 	MIDDLE_EXTENT,	RIGHT_EXTENT,	FRONT_EXTENT,
 	MIDDLE_EXTENT,	LEFT_EXTENT,	FRONT_EXTENT,
@@ -85,7 +88,7 @@ const float vtx_data[] =
 	TOP_EXTENT,		LEFT_EXTENT,	REAR_EXTENT,
 	BOTTOM_EXTENT,	LEFT_EXTENT,	REAR_EXTENT,
 
-	/*colors 1*/
+	//Object 1 colors
 	GREEN_COLOR,
 	GREEN_COLOR,
 	GREEN_COLOR,
@@ -109,7 +112,7 @@ const float vtx_data[] =
 	BROWN_COLOR,
 	BROWN_COLOR,
 
-	/*colors 2*/
+	//Object 2 colors
 	RED_COLOR,
 	RED_COLOR,
 	RED_COLOR,
@@ -134,7 +137,7 @@ const float vtx_data[] =
 	GREY_COLOR,
 };
 
-const GLuint index_data[] =
+const GLushort index_data[] =
 {
 	0, 2, 1,
 	3, 2, 0,
@@ -222,31 +225,27 @@ int rn_t::draw( void )
 	GLfloat offz = 0.0;
 
 	glClearColor( BG_COLOR );
-	glClear( GL_COLOR_BUFFER_BIT );
+	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 	glUseProgram( r_sh_program );
 
 	for( i = 0; i < r_used_vaos; i ++ )
 	{
 		glBindVertexArray( r_vao_ar[i] );
-		//glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, index_data ); 
 		glUniform3f(
 				glGetUniformLocation( r_sh_program, "offset" ),
 				offx,
 				offy,
 				offz );
 		glDrawElements(
-				GL_TRIANGLES,
-				24,
-				GL_UNSIGNED_SHORT,
-				0 );
-		offz -= 1.0f;
+				GL_TRIANGLES, ARRAY_COUNT( index_data ), GL_UNSIGNED_SHORT, 0 );
+		offz = 0.50f;
 	}
 
 	glBindVertexArray( 0 );
 	glUseProgram( 0 );
 
-	offx += 0.03f;
-	offy += 0.01f;
+	offx += 0.01f;
+	offy += 0.005f;
 
 	if( offx > 1.0f )
 		offx = -1.0f;
@@ -491,13 +490,13 @@ int rn_t::init_vtx_b( void )
 
 	/*create the buffer object for the indicies*/
 	glGenBuffers( 1, &r_index_bobj );
-	glBindBuffer( GL_ARRAY_BUFFER, r_index_bobj );
+	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, r_index_bobj );
 	glBufferData(
-			GL_ARRAY_BUFFER,
+			GL_ELEMENT_ARRAY_BUFFER,
 			sizeof(index_data),
 			index_data,
 			GL_STATIC_DRAW );
-	glBindBuffer( GL_ARRAY_BUFFER, 0 );
+	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, 0 );
 
 	return ERR_OK;
 }
@@ -513,11 +512,11 @@ int rn_t::init_vaos( void )
 	size_t pos_data_offset = 0;
 
 	/*generate the first vao*/
-	pos_data_offset = 0;
 	color_data_offset = sizeof(float) * 3 * g_num_vtx;
 
 	glGenVertexArrays( 1, &r_vao_ar[0] );
 	glBindVertexArray( r_vao_ar[0] );
+	glBindBuffer( GL_ARRAY_BUFFER, r_pos_bobj );
 	glEnableVertexAttribArray( 0 );
 	glEnableVertexAttribArray( 1 );
 	glVertexAttribPointer(
@@ -535,7 +534,7 @@ int rn_t::init_vaos( void )
 			GL_FALSE,
 			0,
 			(void*)color_data_offset );
-
+	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, r_index_bobj );
 	glBindVertexArray( 0 );
 	r_used_vaos++;
 
@@ -562,7 +561,7 @@ int rn_t::init_vaos( void )
 			GL_FALSE,
 			0,
 			(void*)color_data_offset );
-
+	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, r_index_bobj );
 	glBindVertexArray( 0 );
 	r_used_vaos++;
 
@@ -576,9 +575,16 @@ desc:
  *****************************************************************************/
 int rn_t::set_gl_state( void )
 {
+	/*set up face culling*/
 	glEnable( GL_CULL_FACE );
 	glCullFace( GL_BACK );
 	glFrontFace( GL_CW );
+
+	/*set up depth tests*/
+	glEnable( GL_DEPTH_TEST );
+	glDepthMask( GL_TRUE );
+	glDepthFunc( GL_LESS );
+	glDepthRange( DR_NEAR, DR_FAR );
 
 	return ERR_OK;
 }
